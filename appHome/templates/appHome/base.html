@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>SISA - Sistema Integrado de Segurança e Acesso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'dist/style.css' %}">
+</head>
+<body class="bg-gray-100">
+
+    <nav class="bg-white shadow-md fixed w-full z-10 top-0 left-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+
+        <!-- Logo -->
+        <div class="flex items-center">
+          <a href="#" class="text-2xl font-bold text-blue-600">SISA</a>
+        </div>
+
+        <!-- Botão mobile -->
+        <div class="flex items-center md:hidden">
+          <button id="menu-btn" class="text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Links (desktop) -->
+        <div class="hidden md:flex space-x-6 items-center">
+
+          <a class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors text-gray-600 hover:text-gray-900 hover:bg-blue-50" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera w-4 h-4 mr-2">
+                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                  <circle cx="12" cy="13" r="3"></circle>
+              </svg>
+              Acesso facial
+          </a>
+
+          <a class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors text-gray-600 hover:text-gray-900 hover:bg-blue-50" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card w-4 h-4 mr-2">
+                  <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                  <line x1="2" x2="22" y1="10" y2="10"></line>
+              </svg>
+              Leitura cartão
+          </a>
+
+          <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Cadastro</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Início</a>
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sobre</a>
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Serviços</a>
+      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contato</a>
+      <a href="#" class="block text-center bg-blue-600 text-white mx-4 my-2 py-2 rounded-lg hover:bg-blue-700 transition">Cadastro</a>
+    </div>
+  </nav>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+    <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto mt-16">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-blue-600 bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
+                    <h1 class="text-2xl font-bold text-white flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera w-6 h-6 mr-3">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                            <circle cx="12" cy="13" r="3"></circle>
+                        </svg>Acesso por Reconhecimento Facial</h1>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4"><div class="relative">
+                            <div class="bg-gray-900 rounded-lg overflow-hidden aspect-video">
+                                <video autoplay="" playsinline="" class="w-full h-full object-cover"></video>
+                            </div>
+                        </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera w-5 h-5">
+                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                                    <circle cx="12" cy="13" r="3"></circle>
+                                </svg>
+                                <span>Iniciar Reconhecimento</span>
+                            </button>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera w-5 h-5 text-gray-600">
+                                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                                        <circle cx="12" cy="13" r="3"></circle>
+                                    </svg><h3 class="text-lg font-semibold text-gray-900">Status do Sistema</h3>
+                                </div>
+                                <p class="text-lg font-medium text-gray-600">Olhe para a câmera para validar seu acesso</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Método Alternativo</h3>
+                                <p class="text-gray-600 mb-4">Caso o reconhecimento facial não funcione, você pode usar seu cartão de estudante.</p>
+                                <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card w-5 h-5">
+                                        <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                                        <line x1="2" x2="22" y1="10" y2="10"></line>
+                                    </svg>
+                                    <span>Acessar com Cartão</span>
+                                </button>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <h4 class="text-sm font-semibold text-blue-900 mb-2">Instruções:</h4>
+                                <ul class="text-sm text-blue-800 space-y-1">
+                                    <li>• Mantenha o rosto centralizado na tela</li>
+                                    <li>• Certifique-se de que há boa iluminação</li>
+                                    <li>• Remova óculos escuros se estiver usando</li>
+                                    <li>• Olhe diretamente para a câmera</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
