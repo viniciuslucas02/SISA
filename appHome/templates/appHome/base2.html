@@ -91,7 +91,7 @@
               <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z">
               </path>
               <circle cx="12" cy="13" r="3"></circle>
-            </svg>Acesso por Reconhecimento Facial
+            </svg>Acesso por Reconhecimento Facial/Verificar se existe aluno
           </h1>
         </div>
         <div class="p-6">
@@ -113,7 +113,7 @@
                   </path>
                   <circle cx="12" cy="13" r="3"></circle>
                 </svg>
-                <span>Cadastrar com qrcode</span>
+                <span>Iniciar Reconhecimento teste</span>
               </button>
             </div>
             <div class="space-y-6">
@@ -129,7 +129,7 @@
                   </svg>
                   <h3 class="text-lg font-semibold text-gray-900">Status do Sistema</h3>
                 </div>
-                <p class="text-lg font-medium text-gray-600">Olhe para a câmera para validar seu acesso</p>
+                <p class="text-lg font-medium text-gray-600">Olhe para a câmera para validar seu acesso teste</p>
               </div>
               <div class="border border-gray-200 rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Método Alternativo</h3>
@@ -252,7 +252,7 @@
           }, 3000); // 🔴 para a câmera aqui
 
           // ✅ Envia o QR code pro Django
-          fetch('/cadastrar/', {
+          fetch('/verificar/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
