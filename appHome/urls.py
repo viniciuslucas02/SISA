@@ -8,4 +8,6 @@ urlpatterns = [
     # Define a view a ser chamada quando a URL é acessada
     path('', views.appHome, name='appHome'),
     path('cadastrar/', views.cadastrar, name='cadastrar'),
+    path('verifica', views.pagVerificar, name='pagVerificar'),
+    path('verificar/', views.encontrarAluno, name='verificar'),
 ]

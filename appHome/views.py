@@ -69,4 +69,47 @@ def cadastrar(request):
 
     return JsonResponse({'error': 'Método não permitido'}, status=405)
 
+
 # -------------------------------------------------------------------
+
+# -------------------------------------------------------------------
+
+def pagVerificar(request):
+    return render(request, 'appHome/base2.html')
+
+
+@csrf_exempt
+def encontrarAluno (request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        url = data.get('url')
+
+        if not url:
+            print("⚠️ Nenhum URL recebido")
+            return JsonResponse({'error': 'Nenhum URL enviado'})
+        print(f"📡 QR Code detectado: {url}")
+
+        try:
+            response = requests.get(url)
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            dados = {}
+
+            for tr in soup.find_all("tr"):
+                tds = tr.find_all("td")
+                if len(tds) == 2:
+                    chave = tds[0].get_text(strip=True)
+                    valor = tds[1].get_text(strip=True)
+                    dados[chave] = valor
+            if not Usuario.objects.filter(nome=dados.get('Para', '')).exists():
+                print("Usuario nao encontrado")
+                
+            else:
+                print("Encontrado")
+
+        except Exception as e:
+            print(f"❌ Erro ao acessar o URL: {e}")
+            return JsonResponse({'error': str(e)})
+        
+    return render(request, 'appHome/base2.html')
+
