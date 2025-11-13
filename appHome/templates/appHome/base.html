@@ -105,7 +105,8 @@
                 </div>
               </div>
               <button
-                class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                id="btn-cadastrar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-camera w-5 h-5">
@@ -168,9 +169,12 @@
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const resultado = document.getElementById("result");
+    const btnC = document.querySelector("#btn-cadastrar");
 
     let scanning = true; // controla o loop
     let stream = null;
+
+
 
     // 🔹 Função para pegar o token CSRF
     function getCookie(name) {
@@ -244,12 +248,8 @@
         const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: "dontInvert" });
 
         if (code) {
-          resultado.innerHTML = `<b>QR Code detectado:</b> ${code.data}`;
+          btnC.textContent = '<b>QR Code detectado, verificando link</b>';
           stopCamera();
-
-          setTimeout(() => {
-            startCameraAgain();
-          }, 3000); // 🔴 para a câmera aqui
 
           // ✅ Envia o QR code pro Django
           fetch('/cadastrar/', {
@@ -262,22 +262,29 @@
           })
             .then(response => response.json())
             .then(data => {
-              console.log('Resposta do servidor:', data);
-              resultado.innerHTML += `<br><b>Título:</b> ${data.title || 'Sem título'}`;
+              if (data.mensagem) {
+                btnC.innerText = data.mensagem;
+                startCameraAgain();
+              }
             })
             .catch(error => {
               console.error('Erro:', error);
               resultado.innerText = "Erro ao enviar dados.";
+              startCameraAgain();
             });
 
-          return; // sai da função
+          return;
         } else {
-          resultado.innerText = "Aponte a câmera para o QR Code...";
+          btnC.innerText = "Aponte a câmera para o QR Code...";
         }
       }
 
       requestAnimationFrame(scanQRCode);
     }
+
+    btnC.addEventListener("click", () => {
+      btnC.textContent = "Aguardando leitura do QR Code...";
+    });
 
   </script>
 

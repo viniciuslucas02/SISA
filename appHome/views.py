@@ -6,6 +6,7 @@ from .models import Usuario
 import requests
 import json
 from datetime import datetime
+from django.contrib import messages
 
 from django.http import HttpResponse
 
@@ -42,6 +43,7 @@ def cadastrar(request):
 
             if Usuario.objects.filter(nome=dados.get('Para', '')).exists():
                 print("Usuário já cadastrado")
+                return JsonResponse({'mensagem': 'Aluno já cadastrado!'})
 
             else:
                 
@@ -57,9 +59,11 @@ def cadastrar(request):
                 )
                 usuario.save()
                 print("Página acessada com sucesso:")
+                
 
                 for chave, valor in dados.items():
                     print(f"  {chave}: {valor}")
+                return JsonResponse({'mensagem': 'Aluno cadastrado com sucesso!'})
 
             return render(request, 'appHome/home.html', {'dados': dados})
 
@@ -71,6 +75,8 @@ def cadastrar(request):
 
 
 # -------------------------------------------------------------------
+
+
 
 # -------------------------------------------------------------------
 
